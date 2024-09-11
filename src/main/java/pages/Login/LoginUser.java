@@ -15,6 +15,9 @@ public class LoginUser extends BasePage {
     @FindBy(id = "login-button")
     static WebElement loginButton;
 
+    @FindBy(className = "error-message-container")
+    static WebElement errorMessageContainer;
+
     static {
         PageFactory.initElements(MyBrowser.driver, LoginUser.class);
     }
@@ -33,5 +36,9 @@ public class LoginUser extends BasePage {
         type(usernameLoginField,username);
         type(passwordLoginField,password);
         click(loginButton);
+    }
+
+    public static String checkUserIsLockedOut(){
+        return errorMessageContainer.getAttribute("textContent");
     }
 }
