@@ -1,32 +1,23 @@
 package pages.MainPage;
 
+import core.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import utils.MyBrowser;
 
-public class MainPageAddItemToCart {
-    @FindBy(id = "add-to-cart-sauce-labs-bike-light")
-    static WebElement bikeLightAddToCart;
-    @FindBy(id = "add-to-cart-sauce-labs-backpack")
-    static WebElement backpackAddToCart;
-    @FindBy(id = "add-to-cart-sauce-labs-bolt-t-shirt")
-    static WebElement tshirtAddToCart;
-    @FindBy(id = "add-to-cart-sauce-labs-fleece-jacket")
-    static WebElement jacketAddToCart;
-    @FindBy(id = "add-to-cart-sauce-labs-onesie")
-    static WebElement onesieAddToCart;
-    @FindBy(id = "add-to-cart-test.allthethings()-t-shirt-(red)")
-    static WebElement redTshirtAddToCart;
+public class MainPageAddItemToCart extends BasePage {
+    private static final By BIKE_LIGHT_ADD_TO_CART_BUTTON = By.id("add-to-cart-sauce-labs-bike-light");
+    private static final By BACKPACK_ADD_TO_CART_BUTTON = By.id("add-to-cart-sauce-labs-backpack");
+    private static final By TSHIRT_ADD_TO_CART_BUTTON = By.id("add-to-cart-sauce-labs-bolt-t-shirt");
+    private static final By JACKET_ADD_TO_CART_BUTTON = By.id("add-to-cart-sauce-labs-fleece-jacket");
+    private static final By ONESIE_ADD_TO_CART_BUTTON = By.id("add-to-cart-sauce-labs-onesie");
+    private static final By RED_TSHIRT_ADD_TO_CART_BUTTON = By.id("add-to-cart-test.allthethings()-t-shirt-(red)");
 
-    static {
-        PageFactory.initElements(MyBrowser.driver, MainPageAddItemToCart.class);
-    }
 
-    public static void AddBikeLightToCart(){bikeLightAddToCart.click();}
-    public static void AddBackpackToCart(){backpackAddToCart.click();}
-    public static void AddTshirtToCart(){tshirtAddToCart.click();}
-    public static void AddJacketToCart(){jacketAddToCart.click();}
-    public static void AddOnesieToCart(){onesieAddToCart.click();}
-    public static void AddRedTshirtToCart(){redTshirtAddToCart.click();}
+    public static void AddBikeLightToCart(){click(BIKE_LIGHT_ADD_TO_CART_BUTTON);}
+    public static void AddBackpackToCart(){click(BACKPACK_ADD_TO_CART_BUTTON);}
+    public static void AddTshirtToCart(){click(TSHIRT_ADD_TO_CART_BUTTON);}
+    public static void AddJacketToCart(){click(JACKET_ADD_TO_CART_BUTTON);}
+    public static void AddOnesieToCart(){click(ONESIE_ADD_TO_CART_BUTTON);}
+    public static void AddRedTshirtToCart(){click(RED_TSHIRT_ADD_TO_CART_BUTTON);}
 }

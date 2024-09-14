@@ -1,26 +1,12 @@
 package pages.Login;
 import core.BasePage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import utils.MyBrowser;
+import org.openqa.selenium.By;
 
 public class LoginUser extends BasePage {
-    @FindBy(id = "user-name")
-    static WebElement usernameLoginField;
-
-    @FindBy(id = "password")
-    static WebElement passwordLoginField;
-
-    @FindBy(id = "login-button")
-    static WebElement loginButton;
-
-    @FindBy(className = "error-message-container")
-    static WebElement errorMessageContainer;
-
-    static {
-        PageFactory.initElements(MyBrowser.driver, LoginUser.class);
-    }
+    public static final By USERNAME_LOGIN_FIELD = By.id("user-name");
+    public static final By PASSWORD_LOGIN_FIELD = By.id("password");
+    public static final By LOGIN_BUTTON = By.id("login-button");
+    public static final By ERROR_MESSAGE_CONTAINER = By.xpath("//*[@id=\"login_button_container\"]/div/form/div[3]");
 
     /**
      * Opens the landing page of the testing website
@@ -33,12 +19,16 @@ public class LoginUser extends BasePage {
      * @param password the password for the relevant username
      */
     public static void userLogin(String username, String password){
-        type(usernameLoginField,username);
-        type(passwordLoginField,password);
-        click(loginButton);
+        type(USERNAME_LOGIN_FIELD,username);
+        type(PASSWORD_LOGIN_FIELD,password);
+        click(LOGIN_BUTTON);
     }
 
-    public static String checkUserIsLockedOut(){
-        return errorMessageContainer.getAttribute("textContent");
+    /**
+     * Tries logging in with a locked account, and checks if the correct error message is displayed
+     * @return - return the text attribute of the error message container
+     */
+    public static String checkUserIsLockedOut(String attribute){
+        return getTextFromElement(ERROR_MESSAGE_CONTAINER,attribute);
     }
 }

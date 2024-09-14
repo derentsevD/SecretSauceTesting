@@ -1,19 +1,12 @@
 package pages.MainPage;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import utils.MyBrowser;
+import core.BasePage;
+import org.openqa.selenium.By;
 
-public class MainPaigeGoToCart {
-    @FindBy(className= "shopping_cart_link")
-    static WebElement cartButton;
-
-    static {
-        PageFactory.initElements(MyBrowser.driver, MainPaigeGoToCart.class);
-    }
+public class MainPaigeGoToCart extends BasePage {
+    private static final By SHOPPING_CART_LINK = By.className("shopping_cart_link");
 
     public static void goToCart(){
-        cartButton.click();
+        click(SHOPPING_CART_LINK);
     }
 }

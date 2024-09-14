@@ -1,23 +1,13 @@
 package pages.Checkout;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import utils.MyBrowser;
+import core.BasePage;
+import org.openqa.selenium.By;
 
-public class CheckoutFillData {
-    @FindBy(id = "first-name")
-    static WebElement firstNameField;
-    @FindBy(id = "last-name")
-    static WebElement lastNameField;
-    @FindBy(id = "postal-code")
-    static WebElement postalCodeField;
-    @FindBy(id = "continue")
-    static WebElement btnContinue;
-
-    static {
-        PageFactory.initElements(MyBrowser.driver, CheckoutFillData.class);
-    }
+public class CheckoutFillData extends BasePage {
+    private static final By FIRST_NAME_FIELD = By.id("first-name");
+    private static final By LAST_NAME_FIELD = By.id("last-name");
+    private static final By POSTAL_CODE_FIELD = By.id("postal-code");
+    private static final By CONTINUE_BUTTON = By.id("continue");
 
     /**
      * Fills the information needed to place the order and clicks continue
@@ -26,9 +16,9 @@ public class CheckoutFillData {
      * @param postalCode - customer's postcode
      */
     public static void FillCheckoutData(String firstName, String lastName, String postalCode){
-        firstNameField.sendKeys(firstName);
-        lastNameField.sendKeys(lastName);
-        postalCodeField.sendKeys(postalCode);
-        btnContinue.click();
+        type(FIRST_NAME_FIELD,firstName);
+        type(LAST_NAME_FIELD,lastName);
+        type(POSTAL_CODE_FIELD,postalCode);
+        click(CONTINUE_BUTTON);
     }
 }

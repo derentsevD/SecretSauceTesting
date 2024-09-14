@@ -8,14 +8,18 @@ import pages.Checkout.CheckoutFillData;
 import pages.CheckoutOverview.CheckoutOverviewFinish;
 import pages.Login.LoginUser;
 import pages.MainPage.MainPageAddItemToCart;
+import pages.MainPage.MainPageSort;
 import pages.MainPage.MainPaigeGoToCart;
+import utils.MyBrowser;
 
 public class MyFirstTest extends BaseTest {
     @Test
     public void logInLockedAccount(){
         LoginUser.goTo();
         LoginUser.userLogin("locked_out_user", "secret_sauce");
-        Assert.assertEquals(LoginUser.checkUserIsLockedOut(),"Epic sadface: Sorry, this user has been locked out.");
+        //locator doesn't work
+        String text = LoginUser.checkUserIsLockedOut("textContent");
+        Assert.assertEquals(text,"Epic sadface: Sorry, this user has been locked out.");
     }
 
     @Test
@@ -30,5 +34,13 @@ public class MyFirstTest extends BaseTest {
         CheckoutOverviewFinish.FinishCheckout();
         Assert.assertTrue(CheckoutOverviewFinish.checkCheckoutCompleteContainerIsDisplayed(),"The order was not placed successfully. Container not displayed.");
         CheckoutOverviewFinish.TakeScreenshot();
+    }
+
+    //Find out why the Select web element is null
+    @Test
+    public void changeSortingType() throws InterruptedException {
+        LoginUser.goTo();
+        LoginUser.userLogin("standard_user", "secret_sauce");
+        MainPageSort.SelectSortType(3);
     }
 }
