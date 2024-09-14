@@ -10,7 +10,6 @@ import pages.Login.LoginUser;
 import pages.MainPage.MainPageAddItemToCart;
 import pages.MainPage.MainPageSort;
 import pages.MainPage.MainPaigeGoToCart;
-import utils.MyBrowser;
 
 public class MyFirstTest extends BaseTest {
     @Test
@@ -26,21 +25,26 @@ public class MyFirstTest extends BaseTest {
     public void placingAnOrder(){
         LoginUser.goTo();
         LoginUser.userLogin("standard_user", "secret_sauce");
-        MainPageAddItemToCart.AddBikeLightToCart();
-        MainPageAddItemToCart.AddOnesieToCart();
+        MainPageAddItemToCart.addBikeLightToCart();
+        MainPageAddItemToCart.addOnesieToCart();
         MainPaigeGoToCart.goToCart();
         CartProceedToCheckout.proceedToCheckout();
-        CheckoutFillData.FillCheckoutData("Dimitar", "Derentsev", "59068");
-        CheckoutOverviewFinish.FinishCheckout();
+        CheckoutFillData.fillCheckoutData("Dimitar", "Derentsev", "59068");
+        CheckoutOverviewFinish.finishCheckout();
         Assert.assertTrue(CheckoutOverviewFinish.checkCheckoutCompleteContainerIsDisplayed(),"The order was not placed successfully. Container not displayed.");
-        CheckoutOverviewFinish.TakeScreenshot();
+        CheckoutOverviewFinish.takeScreenshot();
     }
 
-    //Find out why the Select web element is null
+
     @Test
     public void changeSortingType() throws InterruptedException {
         LoginUser.goTo();
         LoginUser.userLogin("standard_user", "secret_sauce");
-        MainPageSort.SelectSortType(3);
+        //Sorts them by price High->Low
+        MainPageSort.selectSortType(3);
+        //Checks the first product is the most expensive.
+        Assert.assertTrue(MainPageSort.getFirstItemPrice().contains("$49.99"));
     }
+
+
 }

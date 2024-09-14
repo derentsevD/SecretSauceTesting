@@ -15,7 +15,7 @@ public class CheckoutFillData extends BasePage {
      * @param lastName - customer's last name
      * @param postalCode - customer's postcode
      */
-    public static void FillCheckoutData(String firstName, String lastName, String postalCode){
+    public static void fillCheckoutData(String firstName, String lastName, String postalCode){
         type(FIRST_NAME_FIELD,firstName);
         type(LAST_NAME_FIELD,lastName);
         type(POSTAL_CODE_FIELD,postalCode);

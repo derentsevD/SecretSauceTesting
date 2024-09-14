@@ -15,11 +15,11 @@ public class CheckoutOverviewFinish extends BasePage {
     private static final By FINISH_BUTTON = By.id("finish");
     private static final By CHECKOUT_COMPLETE_CONTAINER = By.id("checkout_complete_container");
 
-    public static void FinishCheckout() {
+    public static void finishCheckout() {
         click(FINISH_BUTTON);
     }
 
-    public static void TakeScreenshot() {
+    public static void takeScreenshot() {
         TakesScreenshot ts = (TakesScreenshot) driver;
         File srcFile = ts.getScreenshotAs(OutputType.FILE);
         try {

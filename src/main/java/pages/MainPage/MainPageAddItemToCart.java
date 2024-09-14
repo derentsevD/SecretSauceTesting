@@ -2,8 +2,6 @@ package pages.MainPage;
 
 import core.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class MainPageAddItemToCart extends BasePage {
     private static final By BIKE_LIGHT_ADD_TO_CART_BUTTON = By.id("add-to-cart-sauce-labs-bike-light");
@@ -14,10 +12,10 @@ public class MainPageAddItemToCart extends BasePage {
     private static final By RED_TSHIRT_ADD_TO_CART_BUTTON = By.id("add-to-cart-test.allthethings()-t-shirt-(red)");
 
 
-    public static void AddBikeLightToCart(){click(BIKE_LIGHT_ADD_TO_CART_BUTTON);}
-    public static void AddBackpackToCart(){click(BACKPACK_ADD_TO_CART_BUTTON);}
-    public static void AddTshirtToCart(){click(TSHIRT_ADD_TO_CART_BUTTON);}
-    public static void AddJacketToCart(){click(JACKET_ADD_TO_CART_BUTTON);}
-    public static void AddOnesieToCart(){click(ONESIE_ADD_TO_CART_BUTTON);}
-    public static void AddRedTshirtToCart(){click(RED_TSHIRT_ADD_TO_CART_BUTTON);}
+    public static void addBikeLightToCart(){click(BIKE_LIGHT_ADD_TO_CART_BUTTON);}
+    public static void addBackpackToCart(){click(BACKPACK_ADD_TO_CART_BUTTON);}
+    public static void addTshirtToCart(){click(TSHIRT_ADD_TO_CART_BUTTON);}
+    public static void addJacketToCart(){click(JACKET_ADD_TO_CART_BUTTON);}
+    public static void addOnesieToCart(){click(ONESIE_ADD_TO_CART_BUTTON);}
+    public static void addRedTshirtToCart(){click(RED_TSHIRT_ADD_TO_CART_BUTTON);}
 }
