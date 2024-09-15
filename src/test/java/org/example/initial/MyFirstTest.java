@@ -1,6 +1,7 @@
 package org.example.initial;
 
 import org.example.core.BaseTest;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.Cart.CartProceedToCheckout;
@@ -10,6 +11,9 @@ import pages.Login.LoginUser;
 import pages.MainPage.MainPageAddItemToCart;
 import pages.MainPage.MainPageSort;
 import pages.MainPage.MainPaigeGoToCart;
+import utils.MyBrowser;
+
+import static org.testng.Assert.assertTrue;
 
 public class MyFirstTest extends BaseTest {
     @Test
@@ -18,11 +22,11 @@ public class MyFirstTest extends BaseTest {
         LoginUser.userLogin("locked_out_user", "secret_sauce");
         //locator doesn't work
         String text = LoginUser.checkUserIsLockedOut("textContent");
-        Assert.assertEquals(text,"Epic sadface: Sorry, this user has been locked out.");
+        Assert.assertEquals(text,"Epic sadface: Sorry, this user has been locked out.","User not locked");
     }
 
     @Test
-    public void placingAnOrder(){
+    public void placeAnOrder(){
         LoginUser.goTo();
         LoginUser.userLogin("standard_user", "secret_sauce");
         MainPageAddItemToCart.addBikeLightToCart();
@@ -31,20 +35,26 @@ public class MyFirstTest extends BaseTest {
         CartProceedToCheckout.proceedToCheckout();
         CheckoutFillData.fillCheckoutData("Dimitar", "Derentsev", "59068");
         CheckoutOverviewFinish.finishCheckout();
-        Assert.assertTrue(CheckoutOverviewFinish.checkCheckoutCompleteContainerIsDisplayed(),"The order was not placed successfully. Container not displayed.");
+        assertTrue(CheckoutOverviewFinish.checkCheckoutCompleteContainerIsDisplayed(),"The order was not placed successfully. Container not displayed.");
         CheckoutOverviewFinish.takeScreenshot();
     }
 
 
     @Test
-    public void changeSortingType() throws InterruptedException {
+    public void changeSortingType() {
         LoginUser.goTo();
         LoginUser.userLogin("standard_user", "secret_sauce");
-        //Sorts them by price High->Low
+        //Sorts them by price High->Low(ID = 3)
         MainPageSort.selectSortType(3);
         //Checks the first product is the most expensive.
-        Assert.assertTrue(MainPageSort.getFirstItemPrice().contains("$49.99"));
+        assertTrue(MainPageSort.getFirstItemPrice().contains("$49.99"),"Sorting not correct");
     }
 
-
+    @Test
+    public void logInLogOut(){
+        LoginUser.goTo();
+        LoginUser.userLogin("standard_user", "secret_sauce");
+        LoginUser.userLogout();
+        assertTrue(MyBrowser.driver.findElement(By.id("login-button")).isDisplayed());
+    }
 }

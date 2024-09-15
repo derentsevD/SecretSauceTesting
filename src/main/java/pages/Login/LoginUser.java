@@ -7,7 +7,8 @@ public class LoginUser extends BasePage {
     public static final By PASSWORD_LOGIN_FIELD = By.id("password");
     public static final By LOGIN_BUTTON = By.id("login-button");
     public static final By ERROR_MESSAGE_CONTAINER = By.xpath("//*[@id=\"login_button_container\"]/div/form/div[3]");
-
+    public static final By HAMBURGER_MENU = By.id("react-burger-menu-btn");
+    public static final By LOGOUT_SIDEBAR_LINK = By.id("logout_sidebar_link");
     /**
      * Opens the landing page of the testing website
      */
@@ -30,5 +31,10 @@ public class LoginUser extends BasePage {
      */
     public static String checkUserIsLockedOut(String attribute){
         return getTextFromElement(ERROR_MESSAGE_CONTAINER,attribute);
+    }
+
+    public static void userLogout(){
+    click(HAMBURGER_MENU);
+    click(LOGOUT_SIDEBAR_LINK);
     }
 }
