@@ -7,6 +7,8 @@ import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+
 import org.apache.commons.io.FileUtils;
 
 import static utils.MyBrowser.driver;
@@ -23,7 +25,7 @@ public class CheckoutOverviewFinish extends BasePage {
         TakesScreenshot ts = (TakesScreenshot) driver;
         File srcFile = ts.getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile, new File("E:\\Automation QA\\Screenshots\\checkoutScreenshot.png"));
+            FileUtils.copyFile(srcFile, new File("E:\\Automation QA\\Screenshots\\checkoutScreenshot " + new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date()) +".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

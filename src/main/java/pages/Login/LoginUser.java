@@ -29,8 +29,8 @@ public class LoginUser extends BasePage {
      * Tries logging in with a locked account, and checks if the correct error message is displayed
      * @return - return the text attribute of the error message container
      */
-    public static String checkUserIsLockedOut(String attribute){
-        return getTextFromElement(ERROR_MESSAGE_CONTAINER,attribute);
+    public static String checkUserIsLockedOut(){
+        return getTextFromElement(ERROR_MESSAGE_CONTAINER);
     }
 
     public static void userLogout(){

@@ -16,13 +16,22 @@ import utils.MyBrowser;
 import static org.testng.Assert.assertTrue;
 
 public class MyFirstTest extends BaseTest {
+
     @Test
     public void logInLockedAccount(){
         LoginUser.goTo();
         LoginUser.userLogin("locked_out_user", "secret_sauce");
         //locator doesn't work
-        String text = LoginUser.checkUserIsLockedOut("textContent");
+        String text = LoginUser.checkUserIsLockedOut();
         Assert.assertEquals(text,"Epic sadface: Sorry, this user has been locked out.","User not locked");
+    }
+
+    @Test
+    public void logInLogOut(){
+        LoginUser.goTo();
+        LoginUser.userLogin("standard_user", "secret_sauce");
+        LoginUser.userLogout();
+        assertTrue(MyBrowser.driver.findElement(By.id("login-button")).isDisplayed());
     }
 
     @Test
@@ -39,22 +48,35 @@ public class MyFirstTest extends BaseTest {
         CheckoutOverviewFinish.takeScreenshot();
     }
 
-
     @Test
-    public void changeSortingType() {
+    public void changeSortingTypeToAZ() {
         LoginUser.goTo();
         LoginUser.userLogin("standard_user", "secret_sauce");
-        //Sorts them by price High->Low(ID = 3)
-        MainPageSort.selectSortType(3);
-        //Checks the first product is the most expensive.
-        assertTrue(MainPageSort.getFirstItemPrice().contains("$49.99"),"Sorting not correct");
+        MainPageSort.selectSortType(0);
+        assertTrue(MainPageSort.checkSortedByAZ(),"Items not sorted by alphabetical order A to Z");
     }
 
     @Test
-    public void logInLogOut(){
+    public void changeSortingTypeToZA() {
         LoginUser.goTo();
         LoginUser.userLogin("standard_user", "secret_sauce");
-        LoginUser.userLogout();
-        assertTrue(MyBrowser.driver.findElement(By.id("login-button")).isDisplayed());
+        MainPageSort.selectSortType(1);
+        assertTrue(MainPageSort.checkSortedByZA(),"Items not sorted by alphabetical order Z to A");
+    }
+
+    @Test
+    public void changeSortingTypeToPriceAscending() {
+        LoginUser.goTo();
+        LoginUser.userLogin("standard_user", "secret_sauce");
+        MainPageSort.selectSortType(2);
+        assertTrue(MainPageSort.checkSortedByPriceLoHi(),"Items not sorted by price in ascending.");
+    }
+
+    @Test
+    public void changeSortingTypeToPriceDescending() {
+        LoginUser.goTo();
+        LoginUser.userLogin("standard_user", "secret_sauce");
+        MainPageSort.selectSortType(3);
+        assertTrue(MainPageSort.checkSortedByPriceHiLo(), "Items not sorted by price in descending");
     }
 }
