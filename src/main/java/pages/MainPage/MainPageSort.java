@@ -4,12 +4,10 @@ import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import utils.MyBrowser;
 
 import java.util.ArrayList;
 
 public class MainPageSort extends BasePage {
-    //Selector doesn't work
     private static final By SELECT_CONTAINER = By.className("product_sort_container");
     private static final By FIRST_ITEM = By.cssSelector("#inventory_container > div > div:nth-child(1) > div.inventory_item_description");
     private static final By INVENTORY_ITEM_NAME = By.className("inventory_item_name");
@@ -24,12 +22,11 @@ public class MainPageSort extends BasePage {
      *
      */
     public static void selectSortType(int sortId){
-     Select filterDropdown = new Select(MyBrowser.driver.findElement(SELECT_CONTAINER));
+     Select filterDropdown = new Select(findElement(SELECT_CONTAINER));
      filterDropdown.selectByIndex(sortId);
     }
 
     public static String getFirstItemPrice(){
-       //return MyBrowser.driver.findElement(FIRST_ITEM).getText();
        return getTextFromElement(FIRST_ITEM);
     }
 
@@ -41,7 +38,7 @@ public class MainPageSort extends BasePage {
      */
     public static boolean checkSortedByPriceHiLo(){
         boolean sortedCorrectly = true;
-        ArrayList<WebElement> collection = new ArrayList<>(MyBrowser.driver.findElements(INVENTORY_ITEM_PRICE));
+        ArrayList<WebElement> collection = new ArrayList<>(findElements(INVENTORY_ITEM_PRICE));
         for(int i = 0; i < collection.size() - 1; i++){
             //Gets the double value for price of each element, by getting the text and subtracting the dollar sign.
             if(Double.parseDouble(collection.get(i).getText().substring(1)) < Double.parseDouble(collection.get(i + 1).getText().substring(1))){
@@ -54,7 +51,7 @@ public class MainPageSort extends BasePage {
 
     public static boolean checkSortedByPriceLoHi(){
         boolean sortedCorrectly = true;
-        ArrayList<WebElement> collection = new ArrayList<>(MyBrowser.driver.findElements(INVENTORY_ITEM_PRICE));
+        ArrayList<WebElement> collection = new ArrayList<>(findElements(INVENTORY_ITEM_PRICE));
         for(int i = 0; i < collection.size() - 1; i++){
             //Gets the double value for price of each element, by getting the text and subtracting the dollar sign.
             if(Double.parseDouble(collection.get(i).getText().substring(1)) > Double.parseDouble(collection.get(i + 1).getText().substring(1))){
@@ -67,9 +64,9 @@ public class MainPageSort extends BasePage {
 
     public static boolean checkSortedByAZ(){
         boolean sortedCorrectly = true;
-        ArrayList<WebElement> collection = new ArrayList<>(MyBrowser.driver.findElements(INVENTORY_ITEM_NAME));
+        ArrayList<WebElement> collection = new ArrayList<>(findElements(INVENTORY_ITEM_NAME));
         for(int i = 0; i < collection.size() - 1; i++){
-            //Gets the double value for price of each element, by getting the text and subtracting the dollar sign.
+            //Compares the titles of the items alphabetically, to make sure they are sorted from A to Z
             if(collection.get(i).getText().compareTo(collection.get(i+1).getText()) > 0){
                 sortedCorrectly = false;
                 return sortedCorrectly;
@@ -80,9 +77,9 @@ public class MainPageSort extends BasePage {
 
     public static boolean checkSortedByZA(){
         boolean sortedCorrectly = true;
-        ArrayList<WebElement> collection = new ArrayList<>(MyBrowser.driver.findElements(INVENTORY_ITEM_NAME));
+        ArrayList<WebElement> collection = new ArrayList<>(findElements(INVENTORY_ITEM_NAME));
         for(int i = 0; i < collection.size() - 1; i++){
-            //Gets the double value for price of each element, by getting the text and subtracting the dollar sign.
+            //Compares the titles of the items alphabetically, to make sure they are sorted from Z to A
             if(collection.get(i).getText().compareTo(collection.get(i+1).getText()) < 0){
                 sortedCorrectly = false;
                 return sortedCorrectly;
@@ -90,6 +87,4 @@ public class MainPageSort extends BasePage {
         }
         return sortedCorrectly;
     }
-
-
 }
